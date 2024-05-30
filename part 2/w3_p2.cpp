@@ -103,9 +103,9 @@ int main(int argc, char** argv)
     {        // Collection tester for int-type
         seneca::OrderedCollection<int> oicol; //parameter: typename
         for(const auto& i : ints)
-            oicol += i; //OrderedCollection::operator+=
-        std::cout << "(smallest,largest) items: (" << oicol.getSmallestItem() << "," << oicol.getLargestItem() << ")" << std::endl;
-        std::cout << "size/capacity: " << oicol.size() << "/" << oicol.capacity() << std::endl;
+            oicol += i; //OrderedCollection::operator+= derived from Collection::operator+=
+        std::cout << "(smallest,largest) items: (" << oicol.getSmallestItem() << "," << oicol.getLargestItem() << ")" << std::endl; //OrderedCollection::getSmallestItem derived from Collection::getSmallestItem
+        std::cout << "size/capacity: " << oicol.size() << "/" << oicol.capacity() << std::endl; //OrderedCollection::size derived from Collection::size
         std::cout << "Contents: ";
         oicol.print(std::cout);
     }

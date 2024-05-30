@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include "Book.h"
 
@@ -12,6 +11,11 @@ namespace seneca
 	bool Book::emptyBook() const
 	{
 		return (m_title.length() > 0 && m_numChapters > 0 && m_numPages > 0) ? false : true;
+	}
+
+	double Book::getRatio() const
+	{
+		return (double)m_numPages / (double)m_numChapters;
 	}
 
 	ostream& Book::print(ostream& os) const
@@ -30,7 +34,7 @@ namespace seneca
 			os.precision(6);
 			os.width(15);
 
-			string avgPageStr = "(" + to_string((double)m_numPages / (double)m_numChapters) + ")";
+			string avgPageStr = "(" + to_string(getRatio()) + ")";
 			os << avgPageStr;
 			os.unsetf(ios::left);
 			os.unsetf(ios::fixed);
@@ -47,5 +51,12 @@ namespace seneca
 		return bk.print(os);
 	}
 
+	bool Book::operator<(const Book& other) const {
+		return (getRatio() < other.getRatio());
+	}
+
+	bool Book::operator>(const Book& other) const {
+		return (getRatio() > other.getRatio());
+	}
 
 }

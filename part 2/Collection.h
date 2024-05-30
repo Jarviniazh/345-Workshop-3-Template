@@ -12,7 +12,7 @@ namespace seneca
 		T  m_items[C]{};
 		static T  m_smallestItem; //How to Define it outside the class definition???
 		static T  m_largestItem;
-		size_t m_numItems{};
+		int m_numItems{};
 	protected:
 		T& setSmallestItem(const T& src){
 			return (src < m_smallestItem) ? m_smallestItem = src : m_smallestItem;
@@ -21,6 +21,16 @@ namespace seneca
 		T& setLargestItem(const T& src){
 			return (src > m_largestItem) ? m_largestItem = src : m_largestItem;
 		}
+
+		T& operator[](int i){
+			return m_items[i];
+		}
+
+		int incrSize()
+		{
+			return m_numItems++;
+		}
+
 	public:
 		Collection() {};
 		T getSmallestItem() const {
@@ -31,7 +41,7 @@ namespace seneca
 			return m_largestItem;
 		}
 
-		size_t size() const {
+		unsigned size() const {
 			return m_numItems;
 		}
 
@@ -40,7 +50,7 @@ namespace seneca
 		}
 
 		bool operator+=(const T& src){
-			if(m_numItems < C)
+			if(static_cast<unsigned int>(m_numItems) < C)
 			{
 				setLargestItem(src);
 				setSmallestItem(src);
@@ -51,14 +61,16 @@ namespace seneca
 		}
 
 		std::ostream& print(std::ostream& os) const{
-			os << "[";
-			for (int i = 0; i < m_numItems; ++i)
-			{
-				os << m_items[i];
-				if(i < m_numItems - 1)
-					os << ",";
+			if (m_numItems > 0) {
+				os << "[";
+				for (int i = 0; i < m_numItems; ++i)
+				{
+					os << m_items[i];
+					if (i < m_numItems - 1)
+						os << ",";
+				}
+				os << "]" << std::endl;
 			}
-			os << "]" <<std:: endl;
 			return os;
 		}
 	};
@@ -76,6 +88,45 @@ namespace seneca
 	Book Collection<Book, 10>::m_largestItem = Book("", 10000, 1);
 
 	//Part 2
+	template<>
+	Book Collection<Book, 72>::m_smallestItem = Book("", 1, 10000);
+
+	template<>
+	Book Collection<Book, 72>::m_largestItem = Book("", 10000, 1);
+
+	template<>
+	std::ostream& Collection<Book, 10>::print(std::ostream& os) const
+	{
+		if(size() > 0)
+		{
+			os << "| ---------------------------------------------------------------------------|" << std::endl;
+
+			for (auto i = 0u; i < size(); ++i)
+			{
+				os << "| ";
+				m_items[i].print(os) << " |" << std::endl;
+			}
+			os << "| ---------------------------------------------------------------------------|" << std::endl;
+		}
+		return os;
+	}
+
+	template<>
+	std::ostream& Collection<Book, 72>::print(std::ostream& os) const
+	{
+		if (size() > 0)
+		{
+			os << "| ---------------------------------------------------------------------------|" << std::endl;
+
+			for (auto i = 0u; i < size(); ++i)
+			{
+				os << "| ";
+				m_items[i].print(os) << " |" << std::endl;
+			}
+			os << "| ---------------------------------------------------------------------------|" << std::endl;
+		}
+		return os;
+	}
 
 }
 
