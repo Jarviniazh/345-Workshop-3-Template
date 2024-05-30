@@ -101,9 +101,9 @@ int main(int argc, char** argv)
 
     std::cout << "5. OrderedCollection tester for int >>> ===========================================" << std::endl;
     {        // Collection tester for int-type
-        seneca::OrderedCollection<int> oicol;
+        seneca::OrderedCollection<int> oicol; //parameter: typename
         for(const auto& i : ints)
-            oicol += i;
+            oicol += i; //OrderedCollection::operator+=
         std::cout << "(smallest,largest) items: (" << oicol.getSmallestItem() << "," << oicol.getLargestItem() << ")" << std::endl;
         std::cout << "size/capacity: " << oicol.size() << "/" << oicol.capacity() << std::endl;
         std::cout << "Contents: ";
