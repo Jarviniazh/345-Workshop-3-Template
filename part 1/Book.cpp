@@ -35,6 +35,10 @@ namespace seneca
 			os.unsetf(ios::left);
 			os.unsetf(ios::fixed);
 		}
+		else
+		{
+			os << "| Invalid book data";
+		}
 		return os;
 	}
 

@@ -10,8 +10,8 @@ namespace seneca
 	class Collection
 	{
 		T  m_items[C]{};
-		T  m_smallestItem = 9999; //How to Define it outside the class definition???
-		T  m_largestItem = -9999;
+		static T  m_smallestItem; //How to Define it outside the class definition???
+		static T  m_largestItem;
 		size_t m_numItems{};
 	protected:
 		T& setSmallestItem(const T& src)
@@ -64,7 +64,17 @@ namespace seneca
 		}
 	};
 
+	template <typename T, unsigned C>
+	T Collection<T,C>::m_smallestItem = 9999;
 
+	template <typename T, unsigned C>
+	T Collection<T, C>::m_largestItem = -9999;
+
+	template<>
+	Book Collection<Book, 10>::m_smallestItem = Book("", 1, 10000);
+
+	template<>
+	Book Collection<Book, 10>::m_largestItem = Book("", 10000, 1);
 
 }
 
