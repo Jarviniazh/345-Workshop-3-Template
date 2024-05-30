@@ -1,6 +1,7 @@
 #ifndef SENECA_BOOK_H
 #define SENECA_BOOK_H
 
+#include <iostream>
 namespace seneca
 {
 	class Book

@@ -12,7 +12,7 @@ namespace seneca
 		T  m_items[C]{};
 		static T  m_smallestItem; //How to Define it outside the class definition???
 		static T  m_largestItem;
-		size_t m_numItems{};
+		int m_numItems{};
 	protected:
 		T& setSmallestItem(const T& src)
 		{
@@ -32,7 +32,7 @@ namespace seneca
 			return m_largestItem;
 		}
 
-		size_t size() const {
+		int size() const {
 			return m_numItems;
 		}
 
@@ -41,7 +41,7 @@ namespace seneca
 		}
 
 		bool operator+=(const T& src){
-			if(m_numItems < C)
+			if(static_cast<unsigned int>(m_numItems) < C)
 			{
 				setLargestItem(src);
 				setSmallestItem(src);

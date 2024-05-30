@@ -23,7 +23,7 @@ int main(int argc, char** argv)
     int ints[]{ 25, 30, 20, 15, 25, 5, 35 };
     double doubles[]{ 7.8, 9.10, 3.4, 1.2, 2.3, 6.7 };
     seneca::Book books[]{
-        seneca::Book("Software Architecture for Busy Developers", 7, 174),
+        seneca::Book("Software Architecture for Busy Developers", 7, 174), //Book constructor, title, chapters, pages
         seneca::Book("Low-Code Application Development with Appian",16,462),
         seneca::Book("Natural Language Processing with TensorFlow", 11, 514),
         seneca::Book("Learning DevOps",17,560),
@@ -36,21 +36,21 @@ int main(int argc, char** argv)
     std::cout << "------------------------------------------------------------------------------" << std::endl;
     for (auto i = 0u; i < numBooks-1; i++) {
         std::cout << "| " << i + 1 << ".";
-        books[i].print(std::cout) << "|" << std::endl;;
+        books[i].print(std::cout) << "|" << std::endl;; //Book::print
     }
     std::cout << "| " << numBooks << ".";
-    std::cout << books[numBooks-1] << "|" << std::endl;
+    std::cout << books[numBooks-1] << "|" << std::endl; //Book::operator<<
     std::cout << "============================================================== <<< Book tester" << std::endl << std::endl;
 
     std::cout << "2. Collection tester for int and 10 >>> ======================================" << std::endl;
     {        // Collection tester for int-type
-        seneca::Collection<int, 10> icol;
+        seneca::Collection<int, 10> icol; //template class Collection, parameters int(typename), 10(non-type)
         for(const auto& i : ints)
-            icol += i; 
-        std::cout << "(smallest,largest) items: (" << icol.getSmallestItem() << "," << icol.getLargestItem() << ")" << std::endl;
-        std::cout << "size/capacity: " << icol.size() << "/" << icol.capacity() << std::endl;
+            icol += i; //Collection::operator+=
+        std::cout << "(smallest,largest) items: (" << icol.getSmallestItem() << "," << icol.getLargestItem() << ")" << std::endl; //Collection::getSmallestItem, Collection::getLargestItem
+        std::cout << "size/capacity: " << icol.size() << "/" << icol.capacity() << std::endl; //Collection::size, Collection::capacity
         std::cout << "Contents: ";
-        icol.print(std::cout);
+        icol.print(std::cout); //Collection::print
     }
     std::cout << "========================================= <<< Collection tester for int and 10" << std::endl;
     std::cout << std::endl;
