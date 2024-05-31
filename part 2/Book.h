@@ -17,7 +17,7 @@ namespace seneca
 		// member prototypes that would be necessary for the 
 		// Collection module code and tester module w3_p1.cpp 
 		// to manage Book-type objects. 
-		bool emptyBook() const;
+		bool emptyBook() const; 
 		double getRatio() const;
 
 		// In completing Part 2, add here the missing 
@@ -27,8 +27,8 @@ namespace seneca
 		//
 		// Write the implementations of these functions 
 		// in Book.cpp file
-		bool operator<(const Book& other) const;
-		bool operator>(const Book& other) const;
+		bool operator<(const Book&) const;
+		bool operator>(const Book&) const;
 
 
 		std::ostream& print(std::ostream& os) const;

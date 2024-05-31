@@ -12,32 +12,31 @@ namespace seneca
 	public:
 		OrderedCollection() : Collection<T, 72>() {};
 		bool operator+=(const T& src){
-			if(Collection<T, 72>::size() < 72)
+			if(this->size() < 72)
 			{
-				if(Collection<T, 72>::size() == 0)
+				if(this->size() == 0)
 				{
-					Collection<T, 72>::setSmallestItem(src);
-					Collection<T, 72>::setLargestItem(src);
-					/*Collection<T, 72>::m_items[0] = src;*/
-					this->operator[](0) = src;
-					Collection<T, 72>::incrSize();
+					this->setSmallestItem(src);
+					this->setLargestItem(src);
+					
+					(*this)[0] = src;
+					this->incrSize();
 				}
 				else{
-					if (src < Collection<T, 72>::getSmallestItem()) {
-						Collection<T, 72>::setSmallestItem(src);
+					if (src < this->getSmallestItem()) {
+						this->setSmallestItem(src);
 					}
-					if (src > Collection<T, 72>::getLargestItem()) {
-						Collection<T, 72>::setLargestItem(src);
+					if (src > this->getLargestItem()) {
+						this->setLargestItem(src);
 					}
 
 					int low{}, mid{};
-					int high = Collection<T, 72>::size() - 1;
+					int high = this->size() - 1;
 					while (low <= high)
 					{
 						mid = (high + low) / 2;
-						if(src < this->operator[](mid)){
+						if(src < (*this)[mid]){
 
-						//if (src < Collection<T, 72>::m_items[mid]) {
 							high = mid - 1;
 						}
 						else {
@@ -45,14 +44,12 @@ namespace seneca
 						}
 					}
 
-					for(int i =  Collection<T, 72>::size(); i > low; --i)
+					for(int i = this->size(); i > low; --i)
 					{
-						//Collection<T, 72>::m_items[i] = Collection<T, 72>::m_items[i - 1];
-						this->operator[](i) = this->operator[](i - 1);
+						(*this)[i] = (*this)[i - 1];
 					}
-					//Collection<T, 72>::m_items[low] = src;
-					this->operator[](low) = src;
-					Collection<T, 72>::incrSize();
+					(*this)[low] = src;
+					this->incrSize();
 				}
 				return true;
 			}
