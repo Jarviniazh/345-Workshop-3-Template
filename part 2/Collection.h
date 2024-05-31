@@ -10,11 +10,11 @@ namespace seneca
 	class Collection
 	{
 		T  m_items[C]{};
-		static T  m_smallestItem; //How to Define it outside the class definition???
+		static T  m_smallestItem; 
 		static T  m_largestItem;
 		int m_numItems{};
 	protected:
-		T& setSmallestItem(const T& src){
+		T& setSmallestItem(const T& src) {
 			return (src < m_smallestItem) ? m_smallestItem = src : m_smallestItem;
 		}
 
@@ -22,12 +22,12 @@ namespace seneca
 			return (src > m_largestItem) ? m_largestItem = src : m_largestItem;
 		}
 
-		T& operator[](int i){
+		//Part 2
+		T& operator[](int i) {
 			return m_items[i];
 		}
 
-		int incrSize()
-		{
+		int incrSize() {
 			return m_numItems++;
 		}
 
@@ -81,6 +81,7 @@ namespace seneca
 	template <typename T, unsigned C>
 	T Collection<T, C>::m_largestItem = -9999;
 
+	//Specialization for Book
 	template<>
 	Book Collection<Book, 10>::m_smallestItem = Book("", 1, 10000);
 
@@ -95,14 +96,10 @@ namespace seneca
 	Book Collection<Book, 72>::m_largestItem = Book("", 10000, 1);
 
 	template<>
-	std::ostream& Collection<Book, 10>::print(std::ostream& os) const
-	{
-		if(size() > 0)
-		{
+	std::ostream& Collection<Book, 10>::print(std::ostream& os) const {
+		if(size() > 0) {
 			os << "| ---------------------------------------------------------------------------|" << std::endl;
-
-			for (auto i = 0u; i < size(); ++i)
-			{
+			for (auto i = 0u; i < size(); ++i) {
 				os << "| ";
 				m_items[i].print(os) << " |" << std::endl;
 			}
@@ -112,14 +109,10 @@ namespace seneca
 	}
 
 	template<>
-	std::ostream& Collection<Book, 72>::print(std::ostream& os) const
-	{
-		if (size() > 0)
-		{
+	std::ostream& Collection<Book, 72>::print(std::ostream& os) const {
+		if (size() > 0) {
 			os << "| ---------------------------------------------------------------------------|" << std::endl;
-
-			for (auto i = 0u; i < size(); ++i)
-			{
+			for (auto i = 0u; i < size(); ++i) {
 				os << "| ";
 				m_items[i].print(os) << " |" << std::endl;
 			}

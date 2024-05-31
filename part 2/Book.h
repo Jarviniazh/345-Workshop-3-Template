@@ -18,7 +18,7 @@ namespace seneca
 		// Collection module code and tester module w3_p1.cpp 
 		// to manage Book-type objects. 
 		bool emptyBook() const; 
-		double getRatio() const;
+		double chPageRatio() const;
 
 		// In completing Part 2, add here the missing 
 		// member prototypes that would be necessary for 

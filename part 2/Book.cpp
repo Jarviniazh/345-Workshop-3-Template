@@ -8,34 +8,27 @@ namespace seneca
 
 	Book::Book(const std::string& title, unsigned nChapters, unsigned nPages): m_title(title), m_numChapters(nChapters), m_numPages(nPages) {};
 
-	bool Book::emptyBook() const
-	{
+	bool Book::emptyBook() const{
 		return (m_title.length() > 0 && m_numChapters > 0 && m_numPages > 0) ? false : true;
 	}
 
-	double Book::getRatio() const
-	{
-		return (double)m_numPages / (double)m_numChapters;
+	double Book::chPageRatio() const{
+		return static_cast<double>(m_numPages) / static_cast<double>(m_numChapters);
 	}
 
-	ostream& Book::print(ostream& os) const
-	{
+	ostream& Book::print(ostream& os) const{
 		if(!emptyBook())
 		{
 			os.setf(ios::right);
 			os.width(56);
-
-			string displayStr = m_title + "," + to_string(m_numChapters) + "," + to_string(m_numPages);
-			os << displayStr  << " | ";
-
+			os << m_title + "," + to_string(m_numChapters) + "," + to_string(m_numPages) << " | ";
 			os.unsetf(ios::right);
+
 			os.setf(ios::left);
 			os.setf(ios::fixed);
 			os.precision(6);
 			os.width(15);
-
-			string avgPageStr = "(" + to_string(getRatio()) + ")";
-			os << avgPageStr;
+			os << "(" + to_string(chPageRatio()) + ")";
 			os.unsetf(ios::left);
 			os.unsetf(ios::fixed);
 		}
@@ -46,17 +39,16 @@ namespace seneca
 		return os;
 	}
 
-	ostream& operator<<(ostream& os, const Book& bk)
-	{
+	ostream& operator<<(ostream& os, const Book& bk){
 		return bk.print(os);
 	}
 
 	bool Book::operator<(const Book& other) const {
-		return (getRatio() < other.getRatio());
+		return (chPageRatio() < other.chPageRatio());
 	}
 
 	bool Book::operator>(const Book& other) const {
-		return (getRatio() > other.getRatio());
+		return (chPageRatio() > other.chPageRatio());
 	}
 
 }

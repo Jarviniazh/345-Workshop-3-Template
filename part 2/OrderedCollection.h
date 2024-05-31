@@ -11,18 +11,16 @@ namespace seneca
 	{
 	public:
 		OrderedCollection() : Collection<T, 72>() {};
-		bool operator+=(const T& src){
-			if(this->size() < 72)
-			{
-				if(this->size() == 0)
-				{
+		bool operator+=(const T& src) {
+			if(this->size() < 72){
+				if(this->size() == 0) {
 					this->setSmallestItem(src);
 					this->setLargestItem(src);
 					
 					(*this)[0] = src;
 					this->incrSize();
 				}
-				else{
+				else {
 					if (src < this->getSmallestItem()) {
 						this->setSmallestItem(src);
 					}
@@ -32,8 +30,7 @@ namespace seneca
 
 					int low{}, mid{};
 					int high = this->size() - 1;
-					while (low <= high)
-					{
+					while (low <= high) {
 						mid = (high + low) / 2;
 						if(src < (*this)[mid]){
 
@@ -44,8 +41,7 @@ namespace seneca
 						}
 					}
 
-					for(int i = this->size(); i > low; --i)
-					{
+					for(int i = this->size(); i > low; --i) {
 						(*this)[i] = (*this)[i - 1];
 					}
 					(*this)[low] = src;
@@ -55,7 +51,6 @@ namespace seneca
 			}
 			return false;
 		}
-
 
 
 	};
