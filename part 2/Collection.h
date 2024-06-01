@@ -33,11 +33,11 @@ namespace seneca
 
 	public:
 		Collection() {};
-		T getSmallestItem() const {
+		T getSmallestItem() {
 			return m_smallestItem;
 		}
 
-		T getLargestItem() const {
+		T getLargestItem() {
 			return m_largestItem;
 		}
 

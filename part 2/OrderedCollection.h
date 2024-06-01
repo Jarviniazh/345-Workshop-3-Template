@@ -31,7 +31,7 @@ namespace seneca
 					int low{}, mid{};
 					int high = this->size() - 1;
 					while (low <= high) {
-						mid = (high + low) / 2;
+						mid = low + (high - low) / 2;
 						if(src < (*this)[mid]){
 
 							high = mid - 1;
